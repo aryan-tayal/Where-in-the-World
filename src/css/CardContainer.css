@@ -1,0 +1,91 @@
+.Card-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3.5rem;
+}
+.Controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4.5rem;
+  color: var(--text-color);
+}
+.App.dark-theme .Controls input::placeholder {
+  color: var(--text-color);
+}
+.Controls-input {
+  background-color: var(--elements-color);
+  color: var(--text-color);
+  border: none;
+  width: 35%;
+  border-radius: 5px;
+  box-shadow: 0px 0px 3px 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+.Controls-input > input {
+  height: 100%;
+  width: 100%;
+  display: block;
+  padding: 15px;
+  border: none;
+  font-size: 1.05rem;
+  outline: none;
+  background-color: transparent;
+  color: var(--text-color);
+}
+.Controls-input > i {
+  font-size: 1.05rem;
+  margin: 0 15px;
+}
+.Controls-dropdown button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
+  font-size: 1.05rem;
+  margin-bottom: 10px;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+  background-color: var(--elements-color);
+  padding: 12px 18px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.2);
+}
+.Controls-dropdown-items {
+  width: 200px;
+  position: absolute;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.Controls-dropdown-items.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.Controls-dropdown-item {
+  width: 100%;
+}
+
+.Controls-dropdown-item:hover label,
+.Controls-dropdown-item input:checked + label {
+  background-color: var(--bg-color);
+}
+.Controls-dropdown-item label {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+  background-color: var(--elements-color);
+  padding: 12px 18px;
+  display: inline-block;
+}
+
+.Controls-dropdown-item input {
+  display: none;
+}
