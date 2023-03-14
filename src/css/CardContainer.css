@@ -89,3 +89,26 @@
 .Controls-dropdown-item input {
   display: none;
 }
+@media(max-width:1200px){
+  .Card-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media(max-width:991px){
+  .Card-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .Card-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .Controls {
+    display: block;
+    margin-bottom: 40px;
+  }
+  .Controls-input {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}

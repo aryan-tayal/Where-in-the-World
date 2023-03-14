@@ -5,7 +5,6 @@ import "./css/Country.css";
 
 const Country = () => {
   let country = useLoaderData();
-  console.log(country);
   return (
     <div className="Container">
       <Link to="/" className="Back">

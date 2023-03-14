@@ -68,3 +68,30 @@
 .Back > i {
   margin-right: 5px;
 }
+@media (max-width: 991px) {
+  .Country {
+    display: block;
+  }
+  .Country-img {
+    width: 100%;
+  }
+  .Country-details {
+    flex-direction: column;
+  }
+  .Country-details > div:nth-of-type(1) {
+    margin-right: 0;
+    margin-bottom: 30px;
+  }
+  .Country-body {
+    width: 100%;
+  }
+  .Country-borders {
+    flex-direction: column;
+  }
+  .Country-borders > div{
+    margin-top: 20px;
+  }
+  .Country-borders a {
+    margin-left: 0;
+  }
+}
