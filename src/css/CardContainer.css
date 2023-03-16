@@ -38,11 +38,18 @@
   font-size: 1.05rem;
   margin: 0 15px;
 }
+.Controls-dropdown-group {
+  display: flex;
+}
+.Controls-dropdown {
+  margin-left: 20px;
+  position: relative;
+}
 .Controls-dropdown button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 200px;
+  width: 100%;
   font-size: 1.05rem;
   margin-bottom: 10px;
   border: none;
@@ -53,8 +60,11 @@
   border-radius: 5px;
   box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.2);
 }
+.Controls-dropdown button i{
+  margin-left: 20px;
+}
 .Controls-dropdown-items {
-  width: 200px;
+  width: 100%;
   position: absolute;
   border-radius: 5px;
   overflow: hidden;

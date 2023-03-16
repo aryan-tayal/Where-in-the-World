@@ -4,17 +4,20 @@ import Loader from "./Loader";
 import useFetch from "./useFetch";
 import "./css/CardContainer.css";
 
-const CardContainer = ({ allRegions }) => {
+const CardContainer = ({ allRegions, sortBy }) => {
   // State
   const [searchInput, setSearchInput] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
   const [region, setRegion] = useState([]);
   const [regionDropdownOpen, setRegionDropdownOpen] = useState(false);
+  const [sort, setSort] = useState("Alphabetical");
+  const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
   // Fetch Hook
   const { countries, hasMore, loading, error } = useFetch(
     searchInput,
     pageNumber,
-    region
+    region,
+    sort
   );
   // Infinite Scroll
   const observer = useRef();
@@ -50,6 +53,11 @@ const CardContainer = ({ allRegions }) => {
       setRegionDropdownOpen(false);
     }
   };
+  // Handle Sort Dropdown Change
+  const handleSortChange = (e) => {
+    setSort(e.target.value);
+  };
+  // Close Sort Dropdown
   return (
     <div className="Container" onClick={closeRegionDropdown}>
       <div className="Controls">
@@ -61,27 +69,53 @@ const CardContainer = ({ allRegions }) => {
             onChange={handleSearchChange}
           />
         </div>
-        <div className="Controls-dropdown">
-          <button onClick={() => setRegionDropdownOpen(!regionDropdownOpen)}>
-            Filter by Region<i className="fa-solid fa-chevron-down"></i>
-          </button>
-          <div
-            className={`Controls-dropdown-items ${
-              regionDropdownOpen && "open"
-            }`}
-          >
-            {allRegions.map((r) => (
-              <div className="Controls-dropdown-item" key={r}>
-                <input
-                  type="checkbox"
-                  value={r.toLowerCase()}
-                  id={r.toLowerCase()}
-                  name="region"
-                  onChange={handleRegionChange}
-                />
-                <label htmlFor={r.toLowerCase()}>{r}</label>
-              </div>
-            ))}
+        <div className="Controls-dropdown-group">
+          <div className="Controls-dropdown">
+            <button onClick={() => setSortDropdownOpen(!sortDropdownOpen)}>
+              Sort by {sort} <i className="fa-solid fa-chevron-down"></i>
+            </button>
+            <div
+              className={`Controls-dropdown-items ${
+                sortDropdownOpen && "open"
+              }`}
+            >
+              {sortBy.map((r) => (
+                <div className="Controls-dropdown-item" key={r}>
+                  <input
+                    type="radio"
+                    value={r}
+                    id={r.toLowerCase()}
+                    name="region"
+                    onChange={handleSortChange}
+                    checked={r === sort}
+                  />
+                  <label htmlFor={r.toLowerCase()}>{r}</label>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="Controls-dropdown">
+            <button onClick={() => setRegionDropdownOpen(!regionDropdownOpen)}>
+              Filter by Region<i className="fa-solid fa-chevron-down"></i>
+            </button>
+            <div
+              className={`Controls-dropdown-items ${
+                regionDropdownOpen && "open"
+              }`}
+            >
+              {allRegions.map((r) => (
+                <div className="Controls-dropdown-item" key={r}>
+                  <input
+                    type="checkbox"
+                    value={r.toLowerCase()}
+                    id={r.toLowerCase()}
+                    name="region"
+                    onChange={handleRegionChange}
+                  />
+                  <label htmlFor={r.toLowerCase()}>{r}</label>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -121,6 +155,8 @@ const CardContainer = ({ allRegions }) => {
 
 CardContainer.defaultProps = {
   allRegions: ["Africa", "Asia", "Americas", "Europe", "Oceania"],
+  sortBy: ["Alphabetical", "Population - Ascending", "Population - Descending"],
+  // populationRanges: [5000, 10000, 100000, ],
 };
 
 export default CardContainer;
