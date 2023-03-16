@@ -95,7 +95,7 @@ const CardContainer = ({ allRegions }) => {
                 population={c.population.toLocaleString()}
                 region={c.region}
                 capital={c.capital}
-                key={i}
+                key={c.name.official}
                 ref={lastCountryElementRef}
               />
             );
@@ -107,7 +107,7 @@ const CardContainer = ({ allRegions }) => {
                 population={c.population.toLocaleString()}
                 region={c.region}
                 capital={c.capital}
-                key={i}
+                key={c.name.official}
               />
             );
           }
