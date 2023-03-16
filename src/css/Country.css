@@ -60,6 +60,10 @@
   border-radius: 5px;
   box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.2);
 }
+.Back:hover,
+.Country-borders a:hover {
+  background-color: var(--secondary-color);
+}
 .Back {
   margin: 0;
   margin-bottom: 20px;
@@ -88,7 +92,7 @@
   .Country-borders {
     flex-direction: column;
   }
-  .Country-borders > div{
+  .Country-borders > div {
     margin-top: 20px;
   }
   .Country-borders a {

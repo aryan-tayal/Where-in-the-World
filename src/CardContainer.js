@@ -82,56 +82,6 @@ const CardContainer = ({ allRegions }) => {
                 <label htmlFor={r.toLowerCase()}>{r}</label>
               </div>
             ))}
-            {/* <div className="Controls-dropdown-item">
-              <input
-                type="checkbox"
-                value="americas"
-                id="americas"
-                name="region"
-                onChange={handleRegionChange}
-              />
-              <label htmlFor="americas">Americas</label>
-            </div>
-            <div className="Controls-dropdown-item">
-              <input
-                type="checkbox"
-                value="asia"
-                id="asia"
-                name="region"
-                onChange={handleRegionChange}
-              />
-              <label htmlFor="asia">Asia</label>
-            </div>
-            <div className="Controls-dropdown-item">
-              <input
-                type="checkbox"
-                value="europe"
-                id="europe"
-                name="region"
-                onChange={handleRegionChange}
-              />
-              <label htmlFor="europe">Europe</label>
-            </div>
-            <div className="Controls-dropdown-item">
-              <input
-                type="checkbox"
-                value="africa"
-                id="africa"
-                name="region"
-                onChange={handleRegionChange}
-              />
-              <label htmlFor="africa">Africa</label>
-            </div>
-            <div className="Controls-dropdown-item">
-              <input
-                type="checkbox"
-                value="oceania"
-                id="oceania"
-                name="region"
-                onChange={handleRegionChange}
-              />
-              <label htmlFor="oceania">Oceania</label>
-            </div> */}
           </div>
         </div>
       </div>

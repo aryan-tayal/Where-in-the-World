@@ -74,7 +74,7 @@
 
 .Controls-dropdown-item:hover label,
 .Controls-dropdown-item input:checked + label {
-  background-color: var(--bg-color);
+  background-color: var(--secondary-color);
 }
 .Controls-dropdown-item label {
   width: 100%;
@@ -89,12 +89,12 @@
 .Controls-dropdown-item input {
   display: none;
 }
-@media(max-width:1200px){
+@media (max-width: 1200px) {
   .Card-container {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-@media(max-width:991px){
+@media (max-width: 991px) {
   .Card-container {
     grid-template-columns: repeat(2, 1fr);
   }
