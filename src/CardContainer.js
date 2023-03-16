@@ -1,23 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import Card from "./Card";
-import axios from "axios";
+import Loader from "./Loader";
+import useFetch from "./useFetch";
 import "./css/CardContainer.css";
 
-const CardContainer = () => {
-  const [countries, setCountries] = useState([]);
+const CardContainer = ({ allRegions }) => {
+  // State
   const [searchInput, setSearchInput] = useState("");
+  const [pageNumber, setPageNumber] = useState(1);
   const [region, setRegion] = useState([]);
   const [regionDropdownOpen, setRegionDropdownOpen] = useState(false);
-  useEffect(() => {
-    const getAllCountries = async () => {
-      const res = await axios.get("https://restcountries.com/v3.1/all");
-      setCountries(res.data);
-    };
-    getAllCountries();
-  }, []);
+  // Fetch Hook
+  const { countries, hasMore, loading, error } = useFetch(
+    searchInput,
+    pageNumber,
+    region
+  );
+  // Infinite Scroll
+  const observer = useRef();
+  const lastCountryElementRef = useCallback(
+    (node) => {
+      if (loading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setPageNumber((prevPageNumber) => prevPageNumber + 1);
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [loading, hasMore]
+  );
+  // Handle Search Input Change
   const handleSearchChange = (e) => {
     setSearchInput(e.target.value);
+    setPageNumber(1);
   };
+  // Handle Region Dropdown Change
   const handleRegionChange = (e) => {
     setRegion((values) =>
       e.target.checked
@@ -25,41 +44,12 @@ const CardContainer = () => {
         : values.filter((v) => e.target.value !== v)
     );
   };
+  // Close Region Dropdown
   const closeRegionDropdown = () => {
     if (regionDropdownOpen) {
       setRegionDropdownOpen(false);
     }
   };
-  let cards = [];
-  const regionCountries = countries.filter(
-    (c) => region.includes(c.region.toLowerCase()) || !region.length
-  );
-  if (searchInput.length) {
-    const filteredCountries = regionCountries.filter((c) =>
-      c.name.common.toLowerCase().includes(searchInput.toLowerCase())
-    );
-    cards = filteredCountries.map((c) => (
-      <Card
-        flag={c.flags.png}
-        name={c.name.common}
-        population={c.population.toLocaleString()}
-        region={c.region}
-        capital={c.capital}
-        key={c.name.official}
-      />
-    ));
-  } else {
-    cards = regionCountries.map((c) => (
-      <Card
-        flag={c.flags.png}
-        name={c.name.common}
-        population={c.population.toLocaleString()}
-        region={c.region}
-        capital={c.capital}
-        key={c.name.official}
-      />
-    ));
-  }
   return (
     <div className="Container" onClick={closeRegionDropdown}>
       <div className="Controls">
@@ -80,7 +70,19 @@ const CardContainer = () => {
               regionDropdownOpen && "open"
             }`}
           >
-            <div className="Controls-dropdown-item">
+            {allRegions.map((r) => (
+              <div className="Controls-dropdown-item" key={r}>
+                <input
+                  type="checkbox"
+                  value={r.toLowerCase()}
+                  id={r.toLowerCase()}
+                  name="region"
+                  onChange={handleRegionChange}
+                />
+                <label htmlFor={r.toLowerCase()}>{r}</label>
+              </div>
+            ))}
+            {/* <div className="Controls-dropdown-item">
               <input
                 type="checkbox"
                 value="americas"
@@ -129,15 +131,46 @@ const CardContainer = () => {
                 onChange={handleRegionChange}
               />
               <label htmlFor="oceania">Oceania</label>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
       <div className="Card-container">
-        {cards.length ? cards : "No search results found!"}
+        {countries.map((c, i) => {
+          if (countries.length === i + 1) {
+            return (
+              <Card
+                flag={c.flags.png}
+                name={c.name.common}
+                population={c.population.toLocaleString()}
+                region={c.region}
+                capital={c.capital}
+                key={i}
+                ref={lastCountryElementRef}
+              />
+            );
+          } else {
+            return (
+              <Card
+                flag={c.flags.png}
+                name={c.name.common}
+                population={c.population.toLocaleString()}
+                region={c.region}
+                capital={c.capital}
+                key={i}
+              />
+            );
+          }
+        })}
       </div>
+      <div>{loading && <Loader />}</div>
+      <div>{error && "Error..."}</div>
     </div>
   );
+};
+
+CardContainer.defaultProps = {
+  allRegions: ["Africa", "Asia", "Americas", "Europe", "Oceania"],
 };
 
 export default CardContainer;

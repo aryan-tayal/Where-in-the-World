@@ -1,0 +1,40 @@
+.Loader {
+  padding: 50px;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.Loader-orbit {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 100%;
+  height: 100%;
+  border-radius: 50rem;
+  position: absolute;
+  animation: loader-spin 2s infinite linear;
+}
+.Loader-orbit > i {
+  position: absolute;
+  left: 50%;
+  font-size: 2rem;
+  transform: translateX(-50%) rotate(90deg);
+}
+.Loader-globe > i {
+  font-size: 5.5rem;
+  color: #69718c;
+}
+@keyframes loader-spin {
+  from {
+    transform: translateX(-50%) rotate(0deg);
+  }
+
+  to {
+    transform: translateX(-50%) rotate(1turn);
+  }
+}

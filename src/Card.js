@@ -1,10 +1,10 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import "./css/Card.css";
 
-const Card = ({ flag, name, population, region, capital }) => {
+const Card = forwardRef(({ flag, name, population, region, capital }, ref) => {
   return (
-    <Link to={`/country/${name}`}>
+    <Link to={`/country/${name}`} ref={ref}>
       <div className="Card">
         <div className="Card-img">
           <img src={flag} alt={name} />
@@ -28,6 +28,6 @@ const Card = ({ flag, name, population, region, capital }) => {
       </div>
     </Link>
   );
-};
+});
 
 export default Card;

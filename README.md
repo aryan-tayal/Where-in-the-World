@@ -1,5 +1,6 @@
 # Where in the World?
 View the [live version](https://where-in-the-world-aryan-tayal.vercel.app/)
+
 Challenge from [Frontend Mentor](https://www.frontendmentor.io).
 
 ## Tools Used
@@ -9,7 +10,7 @@ Challenge from [Frontend Mentor](https://www.frontendmentor.io).
 - [Rest Countries API](https://restcountries.com/)
 
 
-## Allows the use to
+## Allows the user to
 - See all countries from the API on the homepage
 - Search for a country using an `input` field
 - Filter countries by region
