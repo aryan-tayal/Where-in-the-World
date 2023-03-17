@@ -25,6 +25,13 @@ const App = () => {
         </div>
       </div>
       <Outlet />
+      <div className="Footer">
+        Made with <i className="fa-solid fa-heart"></i> by{" "}
+        <a href="https://github.com/aryan-tayal" target="new">
+          Aryan Tayal
+        </a>{" "}
+        for a FrontEnd Mentor Challenge.
+      </div>
     </div>
   );
 };
