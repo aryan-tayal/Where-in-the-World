@@ -70,6 +70,7 @@ const CardContainer = ({ allRegions, sortBy }) => {
             type="radio"
             name="sort"
             checked={sort}
+            closeOnChange={true}
           />
           <Dropdown
             title="Filter by Region"
