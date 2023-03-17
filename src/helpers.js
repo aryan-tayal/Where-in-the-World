@@ -39,7 +39,7 @@ const filterCountries = (countries, q, region) => {
     if (region.length) {
       return (
         c.name.common.toLowerCase().includes(q.toLowerCase()) &&
-        region.includes(c.region.toLowerCase())
+        region.includes(c.region)
       );
     } else {
       return c.name.common.toLowerCase().includes(q.toLowerCase());

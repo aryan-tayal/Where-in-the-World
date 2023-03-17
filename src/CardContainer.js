@@ -2,6 +2,7 @@ import React, { useState, useRef, useCallback } from "react";
 import Card from "./Card";
 import Loader from "./Loader";
 import useFetch from "./useFetch";
+import Dropdown from "./Dropdown";
 import "./css/CardContainer.css";
 
 const CardContainer = ({ allRegions, sortBy }) => {
@@ -11,7 +12,6 @@ const CardContainer = ({ allRegions, sortBy }) => {
   const [region, setRegion] = useState([]);
   const [regionDropdownOpen, setRegionDropdownOpen] = useState(false);
   const [sort, setSort] = useState("Alphabetical");
-  const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
   // Fetch Hook
   const { countries, hasMore, loading, error } = useFetch(
     searchInput,
@@ -70,53 +70,22 @@ const CardContainer = ({ allRegions, sortBy }) => {
           />
         </div>
         <div className="Controls-dropdown-group">
-          <div className="Controls-dropdown">
-            <button onClick={() => setSortDropdownOpen(!sortDropdownOpen)}>
-              Sort by {sort} <i className="fa-solid fa-chevron-down"></i>
-            </button>
-            <div
-              className={`Controls-dropdown-items ${
-                sortDropdownOpen && "open"
-              }`}
-            >
-              {sortBy.map((r) => (
-                <div className="Controls-dropdown-item" key={r}>
-                  <input
-                    type="radio"
-                    value={r}
-                    id={r.toLowerCase()}
-                    name="region"
-                    onChange={handleSortChange}
-                    checked={r === sort}
-                  />
-                  <label htmlFor={r.toLowerCase()}>{r}</label>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="Controls-dropdown">
-            <button onClick={() => setRegionDropdownOpen(!regionDropdownOpen)}>
-              Filter by Region<i className="fa-solid fa-chevron-down"></i>
-            </button>
-            <div
-              className={`Controls-dropdown-items ${
-                regionDropdownOpen && "open"
-              }`}
-            >
-              {allRegions.map((r) => (
-                <div className="Controls-dropdown-item" key={r}>
-                  <input
-                    type="checkbox"
-                    value={r.toLowerCase()}
-                    id={r.toLowerCase()}
-                    name="region"
-                    onChange={handleRegionChange}
-                  />
-                  <label htmlFor={r.toLowerCase()}>{r}</label>
-                </div>
-              ))}
-            </div>
-          </div>
+          <Dropdown
+            title={`Sort by ${sort}`}
+            items={sortBy}
+            handleDropdownChange={handleSortChange}
+            type="radio"
+            name="sort"
+            checked={sort}
+          />
+          <Dropdown
+            title="Filter by Region"
+            items={allRegions}
+            handleDropdownChange={handleRegionChange}
+            type="checkbox"
+            name="region"
+            checked={region}
+          />
         </div>
       </div>
       <div className="Card-container">
@@ -158,7 +127,6 @@ const CardContainer = ({ allRegions, sortBy }) => {
 CardContainer.defaultProps = {
   allRegions: ["Africa", "Asia", "Americas", "Europe", "Oceania", "Antarctic"],
   sortBy: ["Alphabetical", "Population - Ascending", "Population - Descending"],
-  // populationRanges: [5000, 10000, 100000, ],
 };
 
 export default CardContainer;
