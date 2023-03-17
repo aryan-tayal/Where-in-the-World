@@ -10,7 +10,7 @@ const CardContainer = ({ allRegions, sortBy }) => {
   const [searchInput, setSearchInput] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
   const [region, setRegion] = useState([]);
-  const [sort, setSort] = useState("Alphabetical");
+  const [sort, setSort] = useState("Population - Descending");
   // Fetch Hook
   const { countries, hasMore, loading, error } = useFetch(
     searchInput,

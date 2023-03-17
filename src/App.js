@@ -14,14 +14,16 @@ const App = () => {
         <h1>Where in the world?</h1>
         <div id="themeToggle">
           <input type="checkbox" id="theme" onChange={handleThemeChange} />
-          <label htmlFor="theme">
-            {darkTheme ? (
-              <i className="fa-solid fa-sun"></i>
-            ) : (
-              <i className="fa-solid fa-moon"></i>
-            )}
-            Dark Mode
-          </label>
+
+          {darkTheme ? (
+            <label htmlFor="theme">
+              <i className="fa-solid fa-sun"></i> Light Mode
+            </label>
+          ) : (
+            <label htmlFor="theme">
+              <i className="fa-regular fa-moon"></i>Dark Mode
+            </label>
+          )}
         </div>
       </div>
       <Outlet />
