@@ -120,32 +120,34 @@ const CardContainer = ({ allRegions, sortBy }) => {
         </div>
       </div>
       <div className="Card-container">
-        {countries.map((c, i) => {
-          if (countries.length === i + 1) {
-            return (
-              <Card
-                flag={c.flags.png}
-                name={c.name.common}
-                population={c.population.toLocaleString()}
-                region={c.region}
-                capital={c.capital}
-                key={c.name.official}
-                ref={lastCountryElementRef}
-              />
-            );
-          } else {
-            return (
-              <Card
-                flag={c.flags.png}
-                name={c.name.common}
-                population={c.population.toLocaleString()}
-                region={c.region}
-                capital={c.capital}
-                key={c.name.official}
-              />
-            );
-          }
-        })}
+        {countries.length
+          ? countries.map((c, i) => {
+              if (countries.length === i + 1) {
+                return (
+                  <Card
+                    flag={c.flags.png}
+                    name={c.name.common}
+                    population={c.population.toLocaleString()}
+                    region={c.region}
+                    capital={c.capital}
+                    key={c.name.official}
+                    ref={lastCountryElementRef}
+                  />
+                );
+              } else {
+                return (
+                  <Card
+                    flag={c.flags.png}
+                    name={c.name.common}
+                    population={c.population.toLocaleString()}
+                    region={c.region}
+                    capital={c.capital}
+                    key={c.name.official}
+                  />
+                );
+              }
+            })
+          : "No results found!"}
       </div>
       <div>{loading && <Loader />}</div>
       <div>{error && "Error..."}</div>
@@ -154,7 +156,7 @@ const CardContainer = ({ allRegions, sortBy }) => {
 };
 
 CardContainer.defaultProps = {
-  allRegions: ["Africa", "Asia", "Americas", "Europe", "Oceania"],
+  allRegions: ["Africa", "Asia", "Americas", "Europe", "Oceania", "Antarctic"],
   sortBy: ["Alphabetical", "Population - Ascending", "Population - Descending"],
   // populationRanges: [5000, 10000, 100000, ],
 };

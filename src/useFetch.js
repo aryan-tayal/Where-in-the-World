@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { sortCountries, filterCountries } from "./helpers";
 
 const useFetch = (query, pageNumber, region, sort, perPageLimit = 15) => {
   // Set state
@@ -7,18 +8,10 @@ const useFetch = (query, pageNumber, region, sort, perPageLimit = 15) => {
   const [error, setError] = useState();
   const [countries, setCountries] = useState([]);
   const [hasMore, setHasMore] = useState(false);
-  // Set countries to empty array if query changes
+  // Set countries to empty array if query, region or sort changes
   useEffect(() => {
     setCountries([]);
-  }, [query]);
-  // Set countries to empty array if region changes
-  useEffect(() => {
-    setCountries([]);
-  }, [region]);
-  // Set countries to empty array if sort changes
-  useEffect(() => {
-    setCountries([]);
-  }, [sort]);
+  }, [query, region, sort]);
   // Fetching Data
   useEffect(() => {
     // Set ignore variable for StrictMode
@@ -31,55 +24,20 @@ const useFetch = (query, pageNumber, region, sort, perPageLimit = 15) => {
       const getData = async () => {
         // Data from restcountries.com
         const { data } = await axios.get("https://restcountries.com/v3.1/all");
-        let sortedCountries = [];
-        if (sort === "Alphabetical") {
-          sortedCountries = data.sort(function (a, b) {
-            if (a.name.common < b.name.common) {
-              return -1;
-            }
-            if (a.name.common > b.name.common) {
-              return 1;
-            }
-            return 0;
-          });
-        } else if (sort === "Population - Ascending") {
-          sortedCountries = data.sort(function (a, b) {
-            if (a.population < b.population) {
-              return -1;
-            }
-            if (a.population > b.population) {
-              return 1;
-            }
-            return 0;
-          });
-        } else if (sort === "Population - Descending") {
-          sortedCountries = data.sort(function (a, b) {
-            if (a.population > b.population) {
-              return -1;
-            }
-            if (a.population < b.population) {
-              return 1;
-            }
-            return 0;
-          });
-        }
+        const sortedCountries = sortCountries(data, sort);
+        console.log(sortedCountries);
         // Filter countries based on region and query
-        const filteredCountries = sortedCountries.filter((c) => {
-          if (region.length) {
-            return (
-              c.name.common.toLowerCase().includes(query.toLowerCase()) &&
-              region.includes(c.region.toLowerCase())
-            );
-          } else {
-            return c.name.common.toLowerCase().includes(query.toLowerCase());
-          }
-        });
+        const filteredCountries = filterCountries(
+          sortedCountries,
+          query,
+          region
+        );
+        console.log(filteredCountries);
         // Limit countries to 15 for infinite scroll
         let limitedCountries = filteredCountries.slice(
           (pageNumber - 1) * perPageLimit,
           pageNumber * perPageLimit
         );
-
         // Check to ignore in StrictMode(prevent duplicates)
         if (!ignore) {
           // Add new countries to the countries array
