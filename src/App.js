@@ -16,9 +16,9 @@ const App = () => {
           <input type="checkbox" id="theme" onChange={handleThemeChange} />
           <label htmlFor="theme">
             {darkTheme ? (
-              <i className="fa-solid fa-moon"></i>
-            ) : (
               <i className="fa-solid fa-sun"></i>
+            ) : (
+              <i className="fa-solid fa-moon"></i>
             )}
             Dark Mode
           </label>
