@@ -10,7 +10,6 @@ const CardContainer = ({ allRegions, sortBy }) => {
   const [searchInput, setSearchInput] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
   const [region, setRegion] = useState([]);
-  const [regionDropdownOpen, setRegionDropdownOpen] = useState(false);
   const [sort, setSort] = useState("Alphabetical");
   // Fetch Hook
   const { countries, hasMore, loading, error } = useFetch(
@@ -47,19 +46,13 @@ const CardContainer = ({ allRegions, sortBy }) => {
         : values.filter((v) => e.target.value !== v)
     );
   };
-  // Close Region Dropdown
-  const closeRegionDropdown = () => {
-    if (regionDropdownOpen) {
-      setRegionDropdownOpen(false);
-    }
-  };
   // Handle Sort Dropdown Change
   const handleSortChange = (e) => {
     setSort(e.target.value);
   };
   // Close Sort Dropdown
   return (
-    <div className="Container" onClick={closeRegionDropdown}>
+    <div className="Container">
       <div className="Controls">
         <div className="Controls-input">
           <i className="fa-solid fa-magnifying-glass"></i>
