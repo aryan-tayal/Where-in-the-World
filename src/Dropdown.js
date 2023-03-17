@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./css/Dropdown.css"
 
 const Dropdown = ({
   title,
@@ -10,13 +11,13 @@ const Dropdown = ({
 }) => {
   const [dropDownOpen, setSortDropdownOpen] = useState(false);
   return (
-    <div className="Controls-dropdown">
+    <div className="Dropdown">
       <button onClick={() => setSortDropdownOpen(!dropDownOpen)}>
         {title} <i className="fa-solid fa-chevron-down"></i>
       </button>
-      <div className={`Controls-dropdown-items ${dropDownOpen && "open"}`}>
+      <div className={`Dropdown-items ${dropDownOpen && "open"}`}>
         {items.map((item) => (
-          <div className="Controls-dropdown-item" key={item}>
+          <div className="Dropdown-item" key={item}>
             <input
               type={type}
               value={item}

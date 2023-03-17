@@ -10,7 +10,7 @@
   margin-bottom: 4.5rem;
   color: var(--text-color);
 }
-.App.dark-theme .Controls input::placeholder {
+.App.dark-theme .Controls-input > input::placeholder {
   color: var(--text-color);
 }
 .Controls-input {
@@ -41,64 +41,7 @@
 .Controls-dropdown-group {
   display: flex;
 }
-.Controls-dropdown {
-  margin-left: 20px;
-  position: relative;
-}
-.Controls-dropdown button {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  font-size: 1.05rem;
-  margin-bottom: 10px;
-  border: none;
-  cursor: pointer;
-  color: var(--text-color);
-  background-color: var(--elements-color);
-  padding: 12px 18px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.2);
-}
-.Controls-dropdown button i{
-  margin-left: 20px;
-}
-.Controls-dropdown-items {
-  width: 100%;
-  position: absolute;
-  border-radius: 5px;
-  overflow: hidden;
-  box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.5);
-  z-index: 100;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s;
-}
-.Controls-dropdown-items.open {
-  opacity: 1;
-  pointer-events: auto;
-}
-.Controls-dropdown-item {
-  width: 100%;
-}
 
-.Controls-dropdown-item:hover label,
-.Controls-dropdown-item input:checked + label {
-  background-color: var(--secondary-color);
-}
-.Controls-dropdown-item label {
-  width: 100%;
-  border: none;
-  cursor: pointer;
-  color: var(--text-color);
-  background-color: var(--elements-color);
-  padding: 12px 18px;
-  display: inline-block;
-}
-
-.Controls-dropdown-item input {
-  display: none;
-}
 @media (max-width: 1200px) {
   .Card-container {
     grid-template-columns: repeat(3, 1fr);
