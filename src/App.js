@@ -4,9 +4,12 @@ import { Outlet } from "react-router-dom";
 import "./css/App.css";
 
 const App = () => {
-  const [darkTheme, setDarkTheme] = useState(false);
+  const [darkTheme, setDarkTheme] = useState(
+    localStorage.getItem("darkTheme") || false
+  );
   const handleThemeChange = () => {
     setDarkTheme(!darkTheme);
+    localStorage.setItem("darkTheme", darkTheme);
   };
   return (
     <div className={`App ${darkTheme && "dark-theme"}`}>
