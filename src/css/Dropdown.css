@@ -55,3 +55,13 @@
 .Dropdown-item > input {
   display: none;
 }
+@media (max-width: 576px) {
+  .Dropdown-items {
+    position: relative;
+    margin-bottom: 10px;
+    height: 0;
+  }
+  .Dropdown-items.open {
+    height: 100%;
+  }
+}
